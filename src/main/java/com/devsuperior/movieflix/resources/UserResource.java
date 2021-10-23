@@ -16,14 +16,11 @@ public class UserResource {
 
     @Autowired
     private UserService service;
-    
-	@Autowired
-	private AuthService authService;
 
     @GetMapping(value = "/profile")
     public ResponseEntity<UserDTO> findCurrentUser(){
         UserDTO userDto = new UserDTO();
-        userDto = service.findById(authService.authenticated().getId());
+        userDto = service.returnLoggedUser();
         return ResponseEntity.ok().body(userDto);
     }
 
